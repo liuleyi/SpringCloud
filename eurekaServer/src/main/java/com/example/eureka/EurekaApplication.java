@@ -8,16 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableEurekaServer
-@RestController
 public class EurekaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(EurekaApplication.class, args);
-    }
-
-    @RequestMapping("/")
-    public String home() {
-        return "Hello World";
     }
 
 }

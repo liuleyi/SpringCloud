@@ -1,0 +1,55 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: cloud-payment-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3307/db2020?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+
+eureka:
+  client:
+    # 表示是否讲自己注册进Eureka 默认true
+    register-with-eureka: true
+    # 是否从EurekaService抓取移有的注册信息，默认true,单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      # defaultZone: http://localhost:7001/eureka
+      # 集群版
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7001.com:7001/eureka/
+  instance:
+    # 替换主机名
+    instance-id: payment8001
+    # 访问路径 ip 展示
+    prefer-ip-address: true
+    # eureka 客户端向服务端发送心跳的时间间隔，单位为秒（默认30s）
+    lease-renewal-interval-in-seconds: 1
+    # eureka 服务端在收到最后一次心跳后的等待时间上限，单位为秒（默认90s）,超时将剔除服务
+    lease-expiration-duration-in-seconds: 2
+
+
+
+  druid:
+    # 指明是否在从池中取出连接前进行检验,如果检验失败, 则从池中去除连接并尝试取出另一个，
+    #注意: 设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+    test-on-borrow: false
+    # 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
+    #注意: 设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+    test-while-idle: true
+    # 指明是否在归还到池中前进行检验，注意: 设置为true后如果要生效,
+    #validationQuery参数必须设置为非空字符串
+    test-on-return: false
+    # SQL查询,用来验证从连接池取出的连接,在将连接返回给调用者之前.
+    #如果指定,则查询必须是一个SQL SELECT并且必须返回至少一行记录
+    validation-query: select 1
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.atgugu.springcloud.entities

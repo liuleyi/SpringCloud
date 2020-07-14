@@ -1,6 +1,5 @@
 package com.aygugu.springcloud;
 
-import com.netflix.hystrix.Hystrix;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;

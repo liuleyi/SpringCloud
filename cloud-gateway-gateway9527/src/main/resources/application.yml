@@ -14,6 +14,9 @@ spring:
           uri: lb://cloud-payment-service
           predicates:
             - Path=/payment/get/**         # 断言，路径相匹配的进行路由
+#            - After=2020-12-24T21:26:36.292+08:00[Asia/Shanghai]
+#            - Cookie=username,zzyy         # cookie    key - value 校验
+            - Header=X-Request-Id,\d+  # 请求头要有X-Request-Id属性并且为整数的正则表达式
         - id: payment_route2
 #          uri: http://localhost:8001
           uri: lb://cloud-payment-service
